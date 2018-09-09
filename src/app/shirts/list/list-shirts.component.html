@@ -1,0 +1,33 @@
+<div>
+  <div *ngIf="error">
+    <mat-card>
+      <h3 matLine> Error happened </h3>
+      <button (click)="fetchShirts()" mat-raised-button> Retry </button>
+    </mat-card>
+  </div>
+  <div *ngIf="loading">
+    loading
+  </div>
+  <div *ngIf="!(loading || error)">
+    <mat-card>
+      <h3> List of shirts </h3>
+      <mat-list>
+        <mat-list-item *ngFor="let shirt of shirts">
+          <img matListAvatar src="{{ shirt.picture }}" alt="...">
+          <h3 matLine> {{ shirt.name }} </h3>
+          <p matLine>
+            Colour:  {{ shirt.colour }}
+          </p>
+          <p matLine>
+            Size: {{ shirt.size }}
+          </p>
+          <p matLine>
+            Price: {{ shirt.price }}
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+  </div>
+
+</div>

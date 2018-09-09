@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ShirtsComponent } from './shirts/list/shirts.component';
+import { ListShirtsComponent } from './shirts/list/list-shirts.component';
 
 const appRoutes: Routes = [
   {
     path: 'shirts',
-    component: ShirtsComponent,
+    component: ListShirtsComponent,
     data: { preload: true }
   },
   { path: '',   redirectTo: '/shirts', pathMatch: 'full' },
