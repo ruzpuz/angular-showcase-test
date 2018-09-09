@@ -1,18 +1,20 @@
 import {Component, Injectable, OnInit } from '@angular/core';
-import { ListShirtsService } from './list-shirts.service';
+import { ShirtsService } from '../shirts.service';
+import { Router } from '@angular/router';
 
-import { Shirt } from './shirt.model';
+import { Shirt } from '../shirt.model';
 
 @Component({
   selector: 'app-shirts',
   templateUrl: './list-shirts.component.html',
   styleUrls: ['./list-shirts.component.css'],
-  providers: [ ListShirtsService ]
+  providers: [ ShirtsService ]
 })
 
 @Injectable({ providedIn: 'root' })
 export class ListShirtsComponent implements  OnInit {
-  service: ListShirtsService;
+  router: Router;
+  service: ShirtsService;
   shirts: Shirt[];
   error: boolean;
   loading: boolean;
@@ -22,8 +24,10 @@ export class ListShirtsComponent implements  OnInit {
   availableColors: string[];
 
   constructor(
-    service: ListShirtsService
+    service: ShirtsService,
+    router: Router
   ) {
+    this.router = router;
     this.service = service;
     this.shirts = [];
     this.error = false;
@@ -57,7 +61,7 @@ export class ListShirtsComponent implements  OnInit {
   async ngOnInit() {
    this.fetchShirts();
   }
-  transform() {
-
+  navigateTo(id) {
+    this.router.navigate(['/shirts', id]);
   }
 }

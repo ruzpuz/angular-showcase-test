@@ -23,7 +23,7 @@
       </mat-select>
 
       <mat-list>
-        <mat-list-item *ngFor="let shirt of (shirts | filterShirts: sizeFilter: colorFilter)">
+        <mat-list-item class="ast-shirt" *ngFor="let shirt of (shirts | filterShirts: sizeFilter: colorFilter)" (click)="navigateTo(shirt.id)">
           <img matListAvatar src="{{ shirt.picture }}" alt="...">
           <h3 matLine> {{ shirt.name }} </h3>
           <p matLine>

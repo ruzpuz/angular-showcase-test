@@ -1,0 +1,32 @@
+<div>
+  <div *ngIf="error">
+    <mat-card>
+      <h3 matLine> Error happened </h3>
+      <button (click)="fetchShirt()" mat-raised-button> Retry </button>
+    </mat-card>
+  </div>
+  <div *ngIf="loading">
+    loading
+  </div>
+  <div *ngIf="!(loading || error)">
+    <mat-list>
+      <mat-list-item class="ast-shirt">
+        <img matListAvatar src="{{ details.picture }}" alt="..." />
+        <h3 matLine> {{ details.name }} </h3>
+        <p matLine>
+          Colour:  {{ details.colour }}
+        </p>
+        <p matLine>
+          Size: {{ details.size }}
+        </p>
+        <p matLine>
+          Price: {{ details.price }}
+        </p>
+        <p matLine>
+          <button (click)="fetchShirt()" mat-raised-button> Add to cart </button>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+</div>

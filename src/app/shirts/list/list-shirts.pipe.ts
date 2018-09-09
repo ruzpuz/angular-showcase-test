@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Shirt} from './shirt.model';
+import { Shirt} from '../shirt.model';
 
 @Pipe({
   name: 'filterShirts'
