@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListShirtsComponent } from './list/list-shirts.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule, MatListModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatIconModule, MatCardModule, MatSelectModule } from '@angular/material';
+import { FilterShirtsPipe } from './list/list-shirts.pipe';
 
 @NgModule({
   imports: [
@@ -11,8 +12,9 @@ import { MatButtonModule, MatListModule, MatIconModule, MatCardModule } from '@a
     MatListModule,
     MatIconModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
-  declarations: [ ListShirtsComponent ]
+  declarations: [ ListShirtsComponent, FilterShirtsPipe ]
 })
 export class ShirtsModule { }

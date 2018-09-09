@@ -1,15 +1,7 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit } from '@angular/core';
 import { ListShirtsService } from './list-shirts.service';
 
-class Shirt {
-  id: number;
-  colour: string;
-  name: string;
-  size: string;
-  picture: string;
-  price: number;
-  quantity: number;
-}
+import { Shirt } from './shirt.model';
 
 @Component({
   selector: 'app-shirts',
@@ -24,8 +16,10 @@ export class ListShirtsComponent implements  OnInit {
   shirts: Shirt[];
   error: boolean;
   loading: boolean;
-  filterBySize: string;
+  sizeFilter: string;
+  colorFilter: string;
   availableSizes: string[];
+  availableColors: string[];
 
   constructor(
     service: ListShirtsService
@@ -34,7 +28,7 @@ export class ListShirtsComponent implements  OnInit {
     this.shirts = [];
     this.error = false;
     this.loading = true;
-    this.filterBySize = null;
+    this.sizeFilter = null;
     this.availableSizes = [];
   }
   async fetchShirts() {
@@ -52,17 +46,18 @@ export class ListShirtsComponent implements  OnInit {
     }).filter((item, index, self) => {
       return self.indexOf(item) === index;
     });
-    console.log(this.availableSizes);
+    this.availableColors = this.shirts.map(item => {
+      return item.colour;
+    }).filter((item, index, self) => {
+      return self.indexOf(item) === index;
+    });
+
     this.loading = false;
   }
   async ngOnInit() {
    this.fetchShirts();
   }
-  filterShirts(): Shirt[] {
-    if (this.filterBySize) {
-      return this.shirts.filter(item => {
-        return item.size === this.filterBySize;
-      });
-    }
+  transform() {
+
   }
 }

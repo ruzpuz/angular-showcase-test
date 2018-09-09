@@ -11,8 +11,19 @@
   <div *ngIf="!(loading || error)">
     <mat-card>
       <h3> List of shirts </h3>
+      <mat-select [(value)]="sizeFilter" placeholder="Filter by sizes">
+        <mat-option *ngFor="let size of availableSizes" [value]="size">
+          {{size}}
+        </mat-option>
+      </mat-select>
+      <mat-select [(value)]="colorFilter" placeholder="Filter by color">
+        <mat-option *ngFor="let color of availableColors" [value]="color">
+          {{color}}
+        </mat-option>
+      </mat-select>
+
       <mat-list>
-        <mat-list-item *ngFor="let shirt of shirts">
+        <mat-list-item *ngFor="let shirt of (shirts | filterShirts: sizeFilter: colorFilter)">
           <img matListAvatar src="{{ shirt.picture }}" alt="...">
           <h3 matLine> {{ shirt.name }} </h3>
           <p matLine>
