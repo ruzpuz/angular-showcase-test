@@ -1,3 +1,13 @@
 <div>
-  test
+  <mat-list>
+    <mat-list-item *ngFor="let item of cart.cart">
+      <h3 matLine> {{ item.name }} </h3>
+      <p matLine>
+        Number of items: {{ item.number }}
+      </p>
+      <p matLine>
+
+      </p>
+    </mat-list-item>
+  </mat-list>
 </div>

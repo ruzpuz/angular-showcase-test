@@ -48,16 +48,16 @@ export class DetailsComponent implements  OnInit {
   }
   addToCart() {
     this.cartState.number += 1;
-    this.localStorageService.addToCart(this.id);
+    this.localStorageService.addToCart(this.id, this.details.name);
   }
   fetchStorage() {
-    this.cartState = this.localStorageService.getCart(this.id);
+    this.cartState = this.localStorageService.getCartItem(this.id, this.details.name);
   }
   ngOnInit() {
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async params => {
       this.id = +params['id'];
-      this.fetchShirt();
+      await this.fetchShirt();
       this.fetchStorage();
 
     });

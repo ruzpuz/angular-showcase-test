@@ -9,11 +9,6 @@ export class LocalStorageService {
 
   constructor() {
     this.storage = window.localStorage;
-  }
-  saveCart() {
-    this.storage.setItem('ast-cart', JSON.stringify(this.cart));
-  }
-  getCart(id): ChartItem {
     const cart = JSON.parse(this.storage.getItem('ast-cart'));
     if (!cart) {
       this.cart = {
@@ -23,26 +18,37 @@ export class LocalStorageService {
     } else {
       this.cart = cart;
     }
+  }
+  saveCart() {
+    this.storage.setItem('ast-cart', JSON.stringify(this.cart));
+  }
+  getCart(): ShoppingCart {
+    return this.cart;
+  }
+  getCartItem(id, name): ChartItem {
     const index = this.cart.cart.findIndex(item => item.id === id );
     if (index > -1) {
       return this.cart.cart[index];
     }
     this.cart.cart.push({
       id,
+      name,
       number: 0
     });
     return {
       id,
+      name,
       number: 0
     };
   }
-  addToCart(id) {
+  addToCart(id, name) {
     const index = this.cart.cart.findIndex(item => item.id === id );
     if (index > -1) {
       this.cart.cart[index].number += 1;
     } else {
       this.cart.cart.push({
         id,
+        name,
         number: 1
       });
     }
