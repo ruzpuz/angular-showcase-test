@@ -23,7 +23,20 @@
           Price: {{ details.price }}
         </p>
         <p matLine>
-          <button (click)="fetchShirt()" mat-raised-button> Add to cart </button>
+          <button (click)="addToCart()" mat-raised-button>
+            <p *ngIf="cartState.number === 0"> Add to cart </p>
+            <p *ngIf="cartState.number > 0"> Add one more</p>
+          </button>
+        </p>
+        <p matLine>
+          <button (click)="navigateToList()" mat-raised-button>
+            Back to List
+          </button>
+        </p>
+        <p matLine>
+          <button (click)="addToCart()" mat-raised-button>
+            Shopping chart
+          </button>
         </p>
       </mat-list-item>
     </mat-list>

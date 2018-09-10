@@ -2,16 +2,19 @@ import {Component, Injectable, OnInit } from '@angular/core';
 import { ShirtsService } from '../shirts.service';
 import { Shirt } from '../shirt.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ChartItem } from '../../shopping-cart/shopping-cart.model';
+import { LocalStorageService } from '../../local-storage.service';
 
 @Component({
   selector: 'app-shirt-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
-  providers: [ ShirtsService ]
+  providers: [ ShirtsService, LocalStorageService ]
 })
 @Injectable({ providedIn: 'root' })
 export class DetailsComponent implements  OnInit {
 
+  cartState: ChartItem;
   details: Shirt;
   id: number;
   router: Router;
@@ -19,15 +22,19 @@ export class DetailsComponent implements  OnInit {
   service: ShirtsService;
   loading: boolean;
   error: boolean;
+  localStorageService: LocalStorageService;
 
   constructor (
     router: Router,
     service: ShirtsService,
-    route: ActivatedRoute
+    route: ActivatedRoute,
+    localStorageService: LocalStorageService
   ) {
+
     this.router = router;
     this.service = service;
     this.route = route;
+    this.localStorageService = localStorageService;
   }
 
   async fetchShirt() {
@@ -39,11 +46,23 @@ export class DetailsComponent implements  OnInit {
     }
     this.loading = false;
   }
+  addToCart() {
+    this.cartState.number += 1;
+    this.localStorageService.addToCart(this.id);
+  }
+  fetchStorage() {
+    this.cartState = this.localStorageService.getCart(this.id);
+  }
   ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.fetchShirt();
-    });
+      this.fetchStorage();
 
+    });
+  }
+  navigateToList() {
+    this.router.navigate(['/shirts']);
   }
 }
