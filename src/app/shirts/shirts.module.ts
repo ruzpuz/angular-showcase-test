@@ -5,7 +5,6 @@ import { DetailsComponent } from './details/details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatListModule, MatIconModule, MatCardModule, MatSelectModule } from '@angular/material';
 import { FilterShirtsPipe } from './list/list-shirts.pipe';
-import { LocalStorageService } from '../local-storage.service';
 
 @NgModule({
   imports: [
