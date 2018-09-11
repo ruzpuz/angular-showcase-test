@@ -64,4 +64,7 @@ export class ListShirtsComponent implements  OnInit {
   navigateTo(id) {
     this.router.navigate(['/shirts', id]);
   }
+  navigateToCart() {
+    this.router.navigate(['/cart']);
+  }
 }

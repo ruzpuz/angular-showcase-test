@@ -1,8 +1,8 @@
+import { Shirt } from '../shirts/shirt.model';
 export class ChartItem {
-  id: number;
+  item: Shirt;
   number: number;
-  name: string;
 }
-export class ShoppingCart {
-  cart: ChartItem[];
+export interface ShoppingCart {
+  [id: number]: ChartItem;
 }

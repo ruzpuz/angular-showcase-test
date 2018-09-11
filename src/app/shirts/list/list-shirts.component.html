@@ -9,6 +9,10 @@
     loading
   </div>
   <div *ngIf="!(loading || error)">
+    <div>
+      <button (click)="navigateToCart()" mat-raised-button> Cart </button>
+
+    </div>
     <mat-card>
       <h3> List of shirts </h3>
       <mat-select [(value)]="sizeFilter" placeholder="Filter by sizes">

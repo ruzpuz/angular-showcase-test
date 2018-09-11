@@ -13,14 +13,21 @@ import { LocalStorageService } from '../local-storage.service';
 export class ShoppingCartComponent {
   localStorageService: LocalStorageService;
   cart: ShoppingCart;
+  router: Router;
 
   constructor(
-    localStorageService: LocalStorageService
+    localStorageService: LocalStorageService,
+    router: Router
   ) {
     this.localStorageService = localStorageService;
     this.cart = this.localStorageService.getCart();
+    this.router = router;
 
   }
-
-
+  getKeys() {
+    return Object.keys(this.cart);
+  }
+  navigateToList() {
+    this.router.navigate(['/shirts']);
+  }
 }

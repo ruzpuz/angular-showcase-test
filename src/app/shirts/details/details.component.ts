@@ -48,10 +48,16 @@ export class DetailsComponent implements  OnInit {
   }
   addToCart() {
     this.cartState.number += 1;
-    this.localStorageService.addToCart(this.id, this.details.name);
+    this.localStorageService.addToCart(this.details);
   }
   fetchStorage() {
-    this.cartState = this.localStorageService.getCartItem(this.id, this.details.name);
+    this.cartState = this.localStorageService.getCartItem(this.id);
+    if (!this.cartState) {
+      this.cartState = {
+        item: this.details,
+        number: 0
+      };
+    }
   }
   ngOnInit() {
 
@@ -64,5 +70,8 @@ export class DetailsComponent implements  OnInit {
   }
   navigateToList() {
     this.router.navigate(['/shirts']);
+  }
+  navigateToCart() {
+    this.router.navigate(['/cart']);
   }
 }

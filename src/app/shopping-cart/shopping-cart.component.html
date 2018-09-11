@@ -1,13 +1,35 @@
 <div>
+  <button (click)="navigateToList()" mat-raised-button>
+    back to list
+  </button>
   <mat-list>
-    <mat-list-item *ngFor="let item of cart.cart">
-      <h3 matLine> {{ item.name }} </h3>
+    <mat-list-item *ngFor="let key of getKeys()">
+      <img matListAvatar src="{{ cart[key].item.picture }}" alt="..." />
+      <h3 matLine> {{ cart[key].item.name }} </h3>
       <p matLine>
-        Number of items: {{ item.number }}
+        Colour:  {{ cart[key].item.colour }}
       </p>
       <p matLine>
-
+        Size: {{ cart[key].item.size }}
+      </p>
+      <p matLine>
+        Price: {{ cart[key].item.price }}
+      </p>
+      <p matLine>
+        Number of items: {{ cart[key].number }}
+      </p>
+      <p matLine>
+        Sum {{ cart[key].item.price * cart[key].number }}
+      </p>
+      <p matLine>
+        + / -
       </p>
     </mat-list-item>
   </mat-list>
+  <div *ngIf="getKeys().length === 0">
+    empty cart
+  </div>
+  <div>
+    Gross total:
+  </div>
 </div>

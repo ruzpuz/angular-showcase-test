@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ShoppingCart, ChartItem } from './shopping-cart/shopping-cart.model';
+import { Shirt } from './shirts/shirt.model';
 
 @Injectable()
 
@@ -11,9 +12,7 @@ export class LocalStorageService {
     this.storage = window.localStorage;
     const cart = JSON.parse(this.storage.getItem('ast-cart'));
     if (!cart) {
-      this.cart = {
-        cart: []
-      };
+      this.cart = { };
       this.saveCart();
     } else {
       this.cart = cart;
@@ -25,32 +24,28 @@ export class LocalStorageService {
   getCart(): ShoppingCart {
     return this.cart;
   }
-  getCartItem(id, name): ChartItem {
-    const index = this.cart.cart.findIndex(item => item.id === id );
-    if (index > -1) {
-      return this.cart.cart[index];
-    }
-    this.cart.cart.push({
-      id,
-      name,
-      number: 0
-    });
-    return {
-      id,
-      name,
-      number: 0
-    };
+  getCartItem(id: number): ChartItem {
+    return this.cart[id];
   }
-  addToCart(id, name) {
-    const index = this.cart.cart.findIndex(item => item.id === id );
-    if (index > -1) {
-      this.cart.cart[index].number += 1;
+  addToCart(newItem: Shirt) {
+    if (this.cart[newItem.id]) {
+      this.cart[newItem.id].number += 1;
     } else {
-      this.cart.cart.push({
-        id,
-        name,
+      this.cart[newItem.id] = {
+        item: newItem,
         number: 1
-      });
+      };
+    }
+
+    this.saveCart();
+  }
+  removeFromCart(item: Shirt) {
+    if (this.cart[item.id]) {
+      if (this.cart[item.id].number === 1) {
+        delete this.cart[item.id];
+      } else {
+        this.cart[item.id].number -= 1;
+      }
     }
     this.saveCart();
   }
